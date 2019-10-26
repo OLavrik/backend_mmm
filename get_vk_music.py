@@ -1,27 +1,12 @@
 import requests
+import os
 import re
 from pprint import pprint
 # import pandas as pd
 from http.cookiejar import Cookie
 from collections import namedtuple
-
-import json
-import random
-import re
-import time
-
-import requests
-
-import json
 import logging
-import random
-import re
-import threading
-import time
-
-import requests
 import six
-
 import jconfig
 
 
@@ -312,7 +297,7 @@ class VkApi(object):
 
 
 
-vk_session = VkApi('TELEPHONE', 'PASSWORD')
+vk_session = VkApi(os.getenv('VK_PHONE'), os.getenv('VK_PASS'))
 vk_session.auth()
 print(vk_session.http.cookies.get('remixsid'))
 
