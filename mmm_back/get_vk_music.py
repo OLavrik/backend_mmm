@@ -296,20 +296,11 @@ class VkApi(object):
         self.logger.info('remixsid is not valid')
 
 
-
-vk_session = VkApi(os.getenv('VK_PHONE'), os.getenv('VK_PASS'))
-vk_session.auth()
-print(vk_session.http.cookies.get('remixsid'))
-
-COOKIE_STRING = f'remixsid={vk_session.http.cookies.get("remixsid")}'
-
-def get_cookie():
-    res = requests.post('https://login.vk.com/?act=login', data=str('act=login&role=al_frame&expire=&recaptcha=&captcha_sid=&captcha_key=&_origin=https%3A%2F%2Fvk.com&ip_h=cfef87c0ea2509e8cd&lg_h=e411a66e4de0b8a269&ul=&email=%2B79214161314&pass=uaz469193318416'))
-    print(res)
-
-
 def get_users_songs(user_id):
-
+    vk_session = VkApi(os.getenv('VK_PHONE'), os.getenv('VK_PASS'))
+    vk_session.auth()
+    print(vk_session.http.cookies.get('remixsid'))
+    COOKIE_STRING = f'remixsid={vk_session.http.cookies.get("remixsid")}'
     cookies_vals = dict(re.findall(r'\s*(.+?)=(.+?);', COOKIE_STRING + ';'))
     cookie_jar = requests.cookies.cookiejar_from_dict(cookies_vals)
 
@@ -361,9 +352,6 @@ def get_users_songs(user_id):
     print('Totally Got {} songs. I.E.:'.format(len(songs)))
     pprint(songs[:10])
     return songs
-
-get_users_songs(17278900)
-
 
 
 
