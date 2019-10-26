@@ -1,8 +1,31 @@
 
+function getCookies(domain, name, callback) {
+chrome.cookies.get({"url": domain, "name": name}, function(cookie) {
+    if(callback) {
+        callback(cookie.value);
+    }
+});
+}
+
+chrome.runtime.onMessage.addListener(
+  function(request, sender, sendResponse) {
+    console.log("xexe");
+
+    getCookies("https://music.mts.ru/", request.giveMe, function(id) {
+      sendResponse({here: id});
+      });
+    return true;
+});
+
+
+
+
+
 chrome.browserAction.onClicked.addListener(function(tab) {
 	chrome.tabs.create({
 		url: "https://music.mts.ru"
 	});
+	//usage:
 });
 
 let haveLicense;

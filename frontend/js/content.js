@@ -68,6 +68,7 @@ let wordstatWebAssistantLoad = function ($, window) {
  };
 
 
+
 exportVK = function($, window) {
     spinner = new Spinner({
   lines: 7, // The number of lines to draw
@@ -90,6 +91,13 @@ exportVK = function($, window) {
   position: 'absolute' // Element positioning
 }).spin();
     $('BODY').append(spinner.el)
+    chrome.runtime.sendMessage({giveMe: "token"}, function(response) {
+    console.log(response.here);
+    });
+
+    chrome.runtime.sendMessage({giveMe: "yandexuid"}, function(response) {
+    console.log(response.here);
+    });
     //Query export here
     setTimeout(() => spinner.stop(), 2000);
 }
