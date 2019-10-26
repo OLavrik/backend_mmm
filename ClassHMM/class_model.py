@@ -1,3 +1,16 @@
+import wave
+from pydub import AudioSegment
+import numpy as np
+import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
+import csv
+import librosa
+from librosa.feature import mfcc
+import sklearn.preprocessing
+import os
+import glob
+from sklearn.cluster import KMeans
 
 class Model:
     def __init__(self,path):
@@ -8,7 +21,10 @@ class Model:
         self.scale = True
         self.path=path
 
-
+    def from_mp3_to_wan(self):
+        for file in glob.glob(self.path+"/*.mp3"):
+            sound = AudioSegment.from_mp3(file)
+            sound.export(str(file).split('.')[0] + '.wav', format="wav")
 
     def getFeaturesFromWAV(self,filename):
         # разобраться что load возвращает
