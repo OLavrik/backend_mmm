@@ -23,7 +23,7 @@ stop)
     kill $(cat $PIDFILE) || true
     ;;
 run)
-    echo $VK_PHONE
+    pgrep -f "$0 $1" > $PIDFILE
     python3 -m flask run --host=0.0.0.0 --port=5000 > $LOGFILE 2>&1
     ;;
 *)
