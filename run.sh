@@ -23,7 +23,7 @@ start)
     nohup $0 run &
     ;;
 stop)
-    kill $(cat $PIDFILE)
+    kill $(cat $PIDFILE) || true
     ;;
 run)
     python3 -m flask run --host=0.0.0.0 --port=5001 > $LOGFILE 2>&1
