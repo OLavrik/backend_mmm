@@ -5,5 +5,7 @@ class Music:
         print("meow")
 
 
+
+
     def __init__(self, s):
         self.song_name = s

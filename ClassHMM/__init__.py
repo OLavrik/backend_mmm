@@ -1,0 +1,1 @@
+from ClassHMM.class_model import Model
