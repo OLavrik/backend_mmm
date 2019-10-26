@@ -26,7 +26,7 @@ stop)
     kill $(cat $PIDFILE) || true
     ;;
 run)
-    python3 -m flask run --host=0.0.0.0 --port=5001 > $LOGFILE 2>&1
+    python3 -m flask run --host=0.0.0.0 --port=5000 > $LOGFILE 2>&1
     ;;
 *)
     echo "$0 [ start | stop ]"
