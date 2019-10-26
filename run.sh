@@ -17,15 +17,13 @@ PIDFILE="flask.pid"
 LOGFILE="flask.log"
 case $1 in
 start)
-    exec 0>&- # close stdin
-    exec 1>&- # close stdout
-    exec 2>&- # close stderr
     nohup $0 run &
     ;;
 stop)
     kill $(cat $PIDFILE) || true
     ;;
 run)
+    echo $VK_PHONE
     python3 -m flask run --host=0.0.0.0 --port=5000 > $LOGFILE 2>&1
     ;;
 *)
