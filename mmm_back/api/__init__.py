@@ -2,6 +2,7 @@ from flask_restplus import Api
 
 
 from mmm_back.api.mmm import ns_mmm
+from mmm_back.api.conserts import ns_conserts
 
 
 api = Api(
@@ -11,3 +12,4 @@ api = Api(
 )
 
 api.add_namespace(ns_mmm)
+api.add_namespace(ns_conserts)
