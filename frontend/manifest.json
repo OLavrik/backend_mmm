@@ -1,0 +1,73 @@
+{
+  "manifest_version": 2,
+  "browser_action": {
+  },
+  "background": {
+    "page": "background.html"
+  },
+
+  "permissions": [
+    "storage",
+    "identity",
+    "https://www.googleapis.com/"
+  ],
+
+  "content_scripts": [
+    {
+      "css": [
+        "/css/bootstrap.min.css",
+        "/css/style.css",
+        "/css/modals.css",
+        "/css/spin.css"
+      ],
+      "js": [
+        "/js/jquery-3.3.1.min.js",
+        "/js/popper.js",
+        "/js/bootstrap.min.js",
+        "/js/xlsx.full.min.js",
+        "/js/content.js",
+        "/js/buy.js",
+        "/js/countdown.js",
+        "/js/modals.js",
+        "/js/spin.js"
+
+      ],
+      
+      "matches": [
+        "*://music.mts.ru/*"
+      ]
+    }
+  ],
+
+  
+  "web_accessible_resources": [
+    "css/style.css",
+    "fonts/Helvetica-Bold.ttf",
+    "fonts/dintextpro.ttf",
+    "images/logo.png",
+    "images/icons/add.png",
+    "images/icons/add2.png",
+    "images/icons/copy.png",
+    "images/icons/copy2.png",
+    "images/icons/copy_range.png",
+    "images/icons/copy_range2.png",
+    "images/icons/delete.png",
+    "images/icons/delete2.png",
+    "images/icons/download.png",
+    "images/icons/download2.png",
+    "images/icons/export.png",
+    "images/icons/export2.png",
+    "images/icons/range.png",
+    "images/icons/range2.png",
+    "images/icons/minus.png"
+  ],
+  "version": "1.0.4",
+  "name": "MTS Music plugin",
+  "description": "Уникальный плагин, значительно расширяющий возможности мтс музыки",
+  "icons": {
+    "128": "images/logo.png",
+    "16": "images/logo.png",
+    "48": "images/logo.png"
+  },
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhpjFVMi1fdpsfhiszZO5OyTAhhVnpzFo56UJ+zv5azjXHepY+wstsyxr1njhakLZs7WRFpe6lZ6KqPWaIV3sGp+IbHreghTCoxQfELPETF1Z/rdfUpkmt8AUr+co6VVGYsovaveuUsY8y/5iRZUmSlPlvjLY6rVTzWaFH7piyvsedUAS6sUM7StfCmVKSiYMRtRuT3ENn160yylSbQrhbmUusJCP3t61t66H8BRqxwNmphrCpMMrYqzkL4yPmOLhw2sJ2fzcS+TibLVTMrMVKWKMunZ755Bds8gt1Bvg+Qro7QO7bupY/OHrYiFdNfjG9W3OcW3YSJ3wZ2bvzRAuTwIDAQAB"
+}
