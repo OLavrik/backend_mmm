@@ -12,21 +12,22 @@ import os
 import glob
 from sklearn.cluster import KMeans
 
+
 class Model:
-    def __init__(self,path):
+    def __init__(self, path):
         self.nfft = 512
         self.nmfcc = 20
         self.hop_length = 512
         self.res_type = 'scipy'
         self.scale = True
-        self.path=path
+        self.path = path
 
     def from_mp3_to_wan(self):
-        for file in glob.glob(self.path+"/*.mp3"):
+        for file in glob.glob(self.path + "/*.mp3"):
             sound = AudioSegment.from_mp3(file)
             sound.export(str(file).split('.')[0] + '.wav', format="wav")
 
-    def getFeaturesFromWAV(self,filename):
+    def getFeaturesFromWAV(self, filename):
         # разобраться что load возвращает
         self.audio, self.sampling_freq = librosa.load(
             filename, sr=None, res_type=res_type)
@@ -45,11 +46,22 @@ class Model:
             listf.append(getFeaturesFromWAV(file))
         self.list_features = np.asarray(listf)
 
-
     def model_knn(self):
         self.model = KMeans(n_clusters=2)
         self.model.fit(self.list_features)
 
-    def model_predict(self,filename):
-        self.model(list1.append(getFeaturesFromWAV(filename)))
+    def model_predict(self, list_filename):
+        listF = []
+        for filename in list_filename:
+            listF.append(getFeaturesFromWAV(filename))
 
+        res = model.predict(listF)
+
+        list_1 = []
+        list_2 = []
+        for i in range(len(res)):
+            if res[i] == 0:
+                list_1.append(list_filename[i])
+            if res[i] == 1:
+                list_2.append(list_filename[i])
+        return list_1, list_2
