@@ -104,7 +104,7 @@ exportVK = function($, window) {
 
     vk_id = console.log(jQuery('.modal_vk_id').value);
     console.log(vk_id)
-
+setTimeout(() => {
     var xhr = new XMLHttpRequest();
 var url = "http://35.223.126.78:5000/plsync/";
 xhr.open("POST", url, true);
@@ -117,14 +117,14 @@ xhr.onreadystatechange = function () {
 };
 var data = JSON.stringify({
   "vk_user_id": 541051855,
-  "mts_kind": 1020,
+  "mts_kind": 1022,
   "mts_token": creds["token"],
   "mts_login": "uid-spfxjqf4",
   "mts_yandexuid": creds["yandexuid"],
   "mts_sign": "529900a1e1981a69b08928cff0821ae57895a8bc:1572146433950"
 });
 xhr.send(data);
-
+}, 1000);
 
     //Query export here
     setTimeout(() => spinner.stop(), 2000);

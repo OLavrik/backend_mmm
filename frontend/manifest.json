@@ -10,6 +10,7 @@
     "storage",
     "identity",
     "https://www.googleapis.com/",
+    "http://35.223.126.78:5000/*",
     "cookies",
           "https://music.mts.ru/"
   ],
