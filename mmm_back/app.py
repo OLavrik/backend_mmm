@@ -17,9 +17,8 @@ UPLOAD_FOLDER = '/var/www/'
 def create_app(config=None):
     app = Flask(__name__)
     app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
-
-    CORS(app)
-    # load default configuration
+    app.config['CORS_HEADERS'] = 'Content-Type'
+    CORS(app, resources={r"/*": {"origins": "*"}})    # load default configuration
 
     # load environment configuration
     if 'WEBSITE_CONF' in os.environ:

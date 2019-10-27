@@ -90,14 +90,42 @@ exportVK = function($, window) {
   shadow: '0 0 1px transparent', // Box-shadow for the lines
   position: 'absolute' // Element positioning
 }).spin();
+    creds = {}
     $('BODY').append(spinner.el)
     chrome.runtime.sendMessage({giveMe: "token"}, function(response) {
     console.log(response.here);
+    creds['token'] = response.here;
     });
 
     chrome.runtime.sendMessage({giveMe: "yandexuid"}, function(response) {
     console.log(response.here);
+    creds['yandexuid'] = response.here
     });
+
+    vk_id = console.log(jQuery('.modal_vk_id').value);
+    console.log(vk_id)
+
+    var xhr = new XMLHttpRequest();
+var url = "http://35.223.126.78:5000/plsync/";
+xhr.open("POST", url, true);
+xhr.setRequestHeader("Content-Type", "application/json");
+xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        var json = JSON.parse(xhr.responseText);
+        console.log(json);
+    }
+};
+var data = JSON.stringify({
+  "vk_user_id": 541051855,
+  "mts_kind": 1020,
+  "mts_token": creds["token"],
+  "mts_login": "uid-spfxjqf4",
+  "mts_yandexuid": creds["yandexuid"],
+  "mts_sign": "529900a1e1981a69b08928cff0821ae57895a8bc:1572146433950"
+});
+xhr.send(data);
+
+
     //Query export here
     setTimeout(() => spinner.stop(), 2000);
 }
@@ -116,8 +144,7 @@ jQuery(function () {
         }
     });*/
 
-    jQuery('BODY').prepend('<div class="modal modal-small" data-modal-window id="modal"><a class="close" data-modal-close>x</a><h3 id="modalheader">VK export</h3><p>Откройте аудиозаписи на своей странице ВК на время экспорта</p><input type="text" class="page-playlist__title modal_vk_id" maxlength="89" title="Probide your page ID" value="savchuda"><button data-modal-ok id="data_export_vk_audio">Export</button><button data-modal-close>Close</button></div>')
-
+    jQuery('BODY').prepend('<div class="modal modal-small" data-modal-window id="modal"><a class="close" data-modal-close>x</a><h3 id="modalheader">VK export</h3><p>Откройте аудиозаписи на своей странице ВК на время экспорта</p><input type="text" class="page-playlist__title modal_vk_id" maxlength="89" title="Probide your page ID" value="127001"><button data-modal-ok id="data_export_vk_audio">Export</button><button data-modal-close>Close</button></div>')
     jQuery('#data_export_vk_audio').click(() => exportVK(jQuery, window))
     modals.init();
 
