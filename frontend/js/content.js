@@ -47,15 +47,15 @@ let wordstatWebAssistantLoad = function ($, window) {
 
                 $('.page-artist__tabs').after(concerts);
             }
+        }
 
-            if (!($('.d-share-popup_after').length)) {
-                $('.d-share-popup').after('<div class="track track_basic d-share-popup_after" style="text-align: center;padding-top: 20px; padding-left:40px; padding-right:40px;color: #FFFFFF;vertical-align: middle; background-image: url(\'chrome-extension://dcikkhacpoppgnmbnnebdiafoeccbdoc/images/icons/add.png\')" data-b="1314"></div>');
+        if (!($('.d-share-popup_after').length)) {
+            $('.d-share-popup').after('<div class="track track_basic d-share-popup_after" style="text-align: center;padding-top: 20px; padding-left:40px; padding-right:40px;color: #FFFFFF;vertical-align: middle; width: 400px; background-image: url(\'chrome-extension://dcikkhacpoppgnmbnnebdiafoeccbdoc/images/icons/add.png\')" data-b="1314"></div>');
 
-                countdown(new Date('October 27, 2019 03:24:00'), function(ts) {
-                      $('.d-share-popup_after').html('До ближайшего концерта: </br>' + ts.toHTML("strong"));
-                    },
-                    countdown.HOURS|countdown.MINUTES);
-            }
+            countdown(new Date('October 27, 2019 03:24:00'), function(ts) {
+                  $('.d-share-popup_after').html('До ближайшего концерта: </br>' + ts.toHTML("strong"));
+                },
+                countdown.HOURS|countdown.MINUTES|countdown.SECONDS);
         }
     }
 
@@ -144,7 +144,9 @@ jQuery(function () {
         }
     });*/
 
+
     jQuery('BODY').prepend('<div class="modal modal-small" data-modal-window id="modal"><a class="close" data-modal-close>x</a><h3 id="modalheader">VK export</h3><p>Откройте аудиозаписи на своей странице ВК на время экспорта</p><input type="text" class="page-playlist__title modal_vk_id" maxlength="89" title="Probide your page ID" value="127001"><button data-modal-ok id="data_export_vk_audio">Export</button><button data-modal-close>Close</button></div>')
+
     jQuery('#data_export_vk_audio').click(() => exportVK(jQuery, window))
     modals.init();
 
