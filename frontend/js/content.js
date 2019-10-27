@@ -67,6 +67,22 @@ let wordstatWebAssistantLoad = function ($, window) {
     }
  };
 
+var s = document.createElement('script');
+s.src = chrome.extension.getURL('js/my_file.js');
+(document.head||document.documentElement).appendChild(s);
+s.onload = function() {
+    s.remove();
+};
+auth_data = {}
+// Event listener
+document.addEventListener('RW759_connectExtension', function(e) {
+    // e.detail contains the transferred data (can be anything, ranging
+    // from JavaScript objects to strings).
+    // Do something, for example:
+    auth_data = e.detail;
+    console.log(auth_data);
+});
+
 
 
 exportVK = function($, window) {
@@ -102,32 +118,38 @@ exportVK = function($, window) {
     creds['yandexuid'] = response.here
     });
 
-    vk_id = console.log(jQuery('.modal_vk_id').value);
-    console.log(vk_id)
+    vk_id = jQuery('.modal_vk_id').val();
+    console.log(vk_id);
+
+    splitted = location.pathname.split('/');
+    login = splitted[2];
+    playlist_id = splitted[4];
+
 setTimeout(() => {
     var xhr = new XMLHttpRequest();
 var url = "http://35.223.126.78:5000/plsync/";
 xhr.open("POST", url, true);
 xhr.setRequestHeader("Content-Type", "application/json");
+xhr.setRequestHeader("Accept", "application/json");
 xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-        var json = JSON.parse(xhr.responseText);
-        console.log(json);
+        console.log(xhr.responseText);
+        alert('Imported');
+        spinner.stop()
     }
 };
+console.log(auth_data.user.sign)
 var data = JSON.stringify({
-  "vk_user_id": 541051855,
-  "mts_kind": 1022,
+  "vk_user_id": vk_id,
+  "mts_kind": playlist_id,
   "mts_token": creds["token"],
-  "mts_login": "uid-spfxjqf4",
+  "mts_login": login,
   "mts_yandexuid": creds["yandexuid"],
-  "mts_sign": "529900a1e1981a69b08928cff0821ae57895a8bc:1572146433950"
+  "mts_sign": auth_data.user.sign
 });
 xhr.send(data);
 }, 1000);
 
-    //Query export here
-    setTimeout(() => spinner.stop(), 2000);
 }
 
 jQuery(function () {

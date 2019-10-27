@@ -8,6 +8,7 @@
 
   "permissions": [
     "storage",
+    "tabs",
     "identity",
     "https://www.googleapis.com/",
     "http://35.223.126.78:5000/*",
@@ -62,7 +63,8 @@
     "images/icons/export2.png",
     "images/icons/range.png",
     "images/icons/range2.png",
-    "images/icons/minus.png"
+    "images/icons/minus.png",
+    "js/my_file.js"
   ],
   "version": "1.0.4",
   "name": "MTS Music plugin",
