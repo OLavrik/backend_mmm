@@ -10,6 +10,7 @@ from librosa.feature import mfcc
 import sklearn.preprocessing
 import os
 import glob
+import uuid
 from sklearn.cluster import KMeans
 import warnings
 warnings.filterwarnings("ignore")
@@ -22,6 +23,7 @@ class MediaParser:
         self.nfft = 512
         self.hop_length = 512
         self.names_list = []
+        self.tempfilename = uuid.uuid4()
 
     def ap(self, file):
         # ap stands for Absolute Path
@@ -36,12 +38,12 @@ class MediaParser:
     def wav_audio_generator(self):
         for mp3_path in self.fs_generator():
             sound = AudioSegment.from_mp3(mp3_path)
-            sound.export('temp_audio.wav', format="wav")
+            sound.export(str(self.tempfilename), format="wav")
             yield os.path.basename(mp3_path)
 
     def feature_extractor_generator(self):
         for name in self.wav_audio_generator():
-            audio, s_freq = librosa.load('temp_audio.wav', sr=None, res_type='scipy')
+            audio, s_freq = librosa.load(str(self.tempfilename), sr=None, res_type='scipy')
             features = librosa.feature.mfcc(audio, s_freq, n_mfcc=self.nmfcc, n_fft=self.nfft,
                                             hop_length=self.hop_length)
             features = sklearn.preprocessing.scale(features)[1]
@@ -60,6 +62,19 @@ class MediaParser:
         df.set_index('song', inplace=True)
         self.df = df
         return df
+
+
+def construct_for_each_subfolder(root_dir):
+    subdolsers = [os.path.join(root_dir, o) for o in os.listdir(root_dir)
+                if os.path.isdir(os.path.join(root_dir, o))]
+    for sf in subdolsers:
+        print(f'Creating DF for: {sf}')
+        m = MediaParser(sf)
+        df = m.construct_df()
+        df.to_pickle(os.path.basename(sf.rstrip('/'))+'.pkl')
+        print(str(df))
+        del m
+
 
 
 class Model:
@@ -116,7 +131,4 @@ class Model:
         return list_1, list_2
 
 if __name__ == '__main__':
-    m = MediaParser('/media/E/Nikita/Music/ForNor')
-    df = m.construct_df()
-    print(df)
-    df.to_pickle('ForNor.pkl')
+    construct_for_each_subfolder('/media/E/Nikita/Music/_VK')
