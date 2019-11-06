@@ -1,0 +1,7 @@
+wave
+pydub
+numpy
+pandas
+matplotlib
+librosa
+sklearn
