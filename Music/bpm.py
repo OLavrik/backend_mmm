@@ -130,7 +130,7 @@ def main(filename):
         n = n + 1;  # counter for debug...
 
     bpm = numpy.median(bpms)
-    print ('Completed.  Estimated Beats Per Minute:', bpm)
+    print ('BPM of the song '+str(filename.split(".")[0])+" =", bpm)
 
     n = range(0, len(correl))
     plt.plot(n, abs(correl));
