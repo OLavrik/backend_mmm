@@ -1,7 +1,7 @@
 # Moscow Hack MTS Melomania challenge winner repository
 
 ## Team
-1. Olga Lavrichenko (DataSciese, Research) [CV](https://drive.google.com/file/d/1iCjdNFILjXu7cuKM93fEEV8y2zHTUqZK/view)
+1. Olga Lavrichenko (DataSciense, Research) [CV](https://drive.google.com/file/d/1iCjdNFILjXu7cuKM93fEEV8y2zHTUqZK/view)
 2. Nikita Motorniy (Python, Backend, DevOPS) [CV](https://cvmkr.com/dTWRN)
 3. Daniil Savchuk (UI, Backend, Lead) [CV](http://cvmkr.com/hR2c)
 
